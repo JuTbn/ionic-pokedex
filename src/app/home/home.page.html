@@ -18,4 +18,9 @@
       </ion-label>
     </ion-item>
   </ion-list>
-</ion-content>
+
+  <ion-infinite-scroll (ionInfinite)="loadPokemon(true, $event)">
+    <ion-infinite-scroll-content loadSpinner="bubbles" loadingText="Loading more Pokemon...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content> 
