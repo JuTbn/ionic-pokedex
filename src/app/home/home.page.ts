@@ -34,7 +34,22 @@ export class HomePage implements OnInit{
       if(this.offset == 125){
         this.infinite.disabled = true;
       }
-    })
+    });
   }
 
+  onSearchChange(e){
+    let value = e.detail.value;
+
+    if (value == '') {
+      this.offset = 0;
+      this.loadPokemon();
+      return;
+    }
+
+    this.pokeService.findPokemon(value).subscribe(res => {
+      this.pokemon = [res];
+    }, err => {
+      this.pokemon = [];
+    });
+  }
 }
