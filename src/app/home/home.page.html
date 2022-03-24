@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header #headerwrapper>
   <ion-toolbar color="primary">
     <ion-title>
       My Pokédex
@@ -6,8 +6,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-searchbar placeholder="Search Pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar>
+<ion-content>
+  <ion-header #condenseheader>
+    <ion-toolbar >
+      <div class="search">
+        <ion-input placeholder="Search" (ionFocus)="toggleSearch()"
+      [class.active-search]="searching"
+      [class.inactive-search]="!searching">
+        <ion-icon name="search"></ion-icon>
+      </ion-input>
+      <ion-button fill="clear" color="primary" size="small" (click)="toggleSearch()"
+      [ngClass]="{'visible-btn':searching, 'hidden-btn': !searching}">
+      Cancel
+    </ion-button>
+      </div>
+      <!-- <ion-searchbar placeholder="Search Pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar> -->
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="search-overlay" #overlay (click)="toggleSearch()"></div>
 
   <ion-list *ngIf="pokemon.length == 0">
     <ion-item *ngFor="let i of [1,2,3,4,5]">
